@@ -21,5 +21,5 @@ product_price DOUBLE
 CREATE TABLE order_detail(
 order_id INT ,FOREIGN KEY(order_id)REFERENCES `order`(order_id),
 product_id INT ,FOREIGN KEY(product_id)REFERENCES product(product_id),
-order_detail_qtl INT
+order_detail_qty INT
 );
