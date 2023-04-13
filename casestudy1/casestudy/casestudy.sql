@@ -27,12 +27,12 @@ ma_trinh_do INT,FOREIGN KEY(ma_trinh_do) REFERENCES trinh_do(ma_trinh_do),
 ma_bo_phan INT,FOREIGN KEY(ma_bo_phan) REFERENCES bo_phan(ma_bo_phan)
 );
 CREATE TABLE loai_khach(
-ma_khach_hang INT PRIMARY KEY,
+ma_loai_khach INT PRIMARY KEY,
 ten_loai_khach VARCHAR(45) NOT NULL
 );
 CREATE TABLE khach_hang(
 ma_khach_hang INT PRIMARY KEY,
-ma_loai_khach INT, FOREIGN KEY(ma_loai_khach) REFERENCES loai_khach(ma_khach_hang),
+ma_loai_khach INT, FOREIGN KEY(ma_loai_khach) REFERENCES loai_khach(ma_loai_khach),
 ho_ten VARCHAR(45) NOT NULL,
 ngay_sinh DATE NOT NULL,
 gioi_tinh BIT(1) NOT NULL,
@@ -153,10 +153,31 @@ INSERT INTO hop_dong_chi_tiet VALUE(1,2,1,5),
 (7,2,2,12);
 
 -- 2.	Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 kí tự.
-SELECT *FROM nhan_vien WHERE ho_ten LIKE 'H%'OR  ho_ten LIKE   'T%'  OR  ho_ten LIKE 'K%' AND length(ho_ten) <=15;
+SELECT * FROM nhan_vien WHERE ho_ten LIKE 'H%'OR  ho_ten LIKE   'T%'  OR  ho_ten LIKE 'K%' AND length(ho_ten) <=15;
 -- 3.	Hiển thị thông tin của tất cả khách hàng có độ tuổi từ 18 đến 50 tuổi và có địa chỉ ở “Đà Nẵng” hoặc “Quảng Trị”
 SELECT *FROM khach_hang WHERE(round(DATEDIFF(CURDATE(),ngay_sinh)/365,0 ) ) BETWEEN 18 AND 50 AND (dia_chi LIKE'%Đà Nẵng%' OR dia_chi LIKE '%Quảng Trị%');
+-- 4.	Đếm xem tương ứng với mỗi khách hàng đã từng đặt phòng bao nhiêu lần. 
+-- Kết quả hiển thị được sắp xếp tăng dần theo số lần đặt phòng của khách hàng. Chỉ đếm những khách hàng nào có Tên loại khách hàng là “Diamond”.
+SELECT  k.*,lk.ten_loai_khach, COUNT(k.ma_khach_hang) FROM khach_hang k 
+  INNER JOIN loai_khach lk ON k.ma_loai_khach =lk.ma_loai_khach
+ INNER JOIN  hop_dong h ON k.ma_khach_hang=h.ma_khach_hang   
+ WHERE lk.ten_loai_khach ='Diamond' GROUP BY k.ma_khach_hang ORDER BY k.ma_khach_hang ;
 
+-- 5.Hiển thị ma_khach_hang, ho_ten, ten_loai_khach, ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong, ngay_ket_thuc, tong_tien 
+-- (Với tổng tiền được tính theo công thức như sau:
+-- Chi Phí Thuê + Số Lượng * Giá, với Số Lượng và Giá là từ bảng dich_vu_di_kem, hop_dong_chi_tiet) cho tất cả các khách hàng đã từng đặt phòng.
+-- (những khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).  
+SELECT kh.ma_khach_hang AS 'mãkháchhàng', ho_ten, ten_loai_khach , ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong , ngay_ket_thuc FROM khach_hang kh 
+INNER JOIN  hop_dong hd  ON kh.ma_khach_hang=hd.ma_khach_hang
+INNER JOIN loai_khach lk ON kh.ma_loai_khach=lk.ma_loai_khach
+INNER JOIN dich_vu dv ON dv.ma_dich_vu=hd.ma_dich_vu GROUP BY kh.ma_khach_hang, ma_hop_dong
+;
 
 
 -- drop DATABASE furama;
+SELECT * FROM khach_hang k, loai_khach lk WHERE k.ma_loai_khach = lk.ma_loai_khach;
+SELECT ma_loai_khach, COUNT(ma_loai_khach) FROM khach_hang WHERE ma_khach_hang > 3 GROUP BY ma_loai_khach
+
+
+
+

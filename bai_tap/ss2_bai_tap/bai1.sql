@@ -1,7 +1,8 @@
 CREATE DATABASE vat_tu;
 USE vat_tu;
 CREATE TABLE so_dien_thoai(
-ten_so_dien_thoai VARCHAR(11) PRIMARY KEY 
+so_dien_thoai VARCHAR(11) PRIMARY KEY ,
+ ma_nha_cung_cap INT,FOREIGN KEY (ma_nha_cung_cap) REFERENCES nha_cung_cap(ma_nha_cung_cap)
 
 );
 CREATE TABLE phieu_xuat(
@@ -15,9 +16,7 @@ ngay_nhap DATE
 CREATE TABLE nha_cung_cap (
     ma_nha_cung_cap INT PRIMARY KEY,
     ten_nha_cung_cap VARCHAR(50),
-    dia_chi VARCHAR(50),
-    ten_so_dien_thoai VARCHAR(11),
-    FOREIGN KEY (ten_so_dien_thoai) REFERENCES so_dien_thoai (ten_so_dien_thoai)
+    dia_chi VARCHAR(50)
 );
 CREATE TABLE don_dat_hang(
 so_dat_hang INT PRIMARY KEY ,
@@ -45,7 +44,8 @@ CREATE TABLE chi_tiet_phieu_nhap (
         REFERENCES phieu_nhap (so_pn),
     ma_vat_tu INT,
     FOREIGN KEY (ma_vat_tu)
-        REFERENCES vat_tu (ma_vat_tu)
+        REFERENCES vat_tu (ma_vat_tu),
+	PRIMARY KEY (so_phieu_nhap,ma_vat_tu)
 );
 CREATE TABLE chi_tiet_don_hang (
 ma_vat_tu INT,FOREIGN KEY (ma_vat_tu) REFERENCES vat_tu(ma_vat_tu),
