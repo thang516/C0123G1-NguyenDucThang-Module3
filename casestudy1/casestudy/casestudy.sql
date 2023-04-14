@@ -167,10 +167,12 @@ SELECT  k.*,lk.ten_loai_khach, COUNT(k.ma_khach_hang) FROM khach_hang k
 -- (Với tổng tiền được tính theo công thức như sau:
 -- Chi Phí Thuê + Số Lượng * Giá, với Số Lượng và Giá là từ bảng dich_vu_di_kem, hop_dong_chi_tiet) cho tất cả các khách hàng đã từng đặt phòng.
 -- (những khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).  
-SELECT kh.ma_khach_hang AS 'mãkháchhàng', ho_ten, ten_loai_khach , ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong , ngay_ket_thuc FROM khach_hang kh 
-INNER JOIN  hop_dong hd  ON kh.ma_khach_hang=hd.ma_khach_hang
+SELECT kh.ma_khach_hang AS 'mãkháchhàng', (dv.chi_phi_thue + hdct.so_luong *dvdk.gia ) as total, ho_ten,dv.chi_phi_thue, ten_loai_khach , hd.ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong , ngay_ket_thuc FROM khach_hang kh 
+LEFT JOIN  hop_dong hd  ON kh.ma_khach_hang=hd.ma_khach_hang
 INNER JOIN loai_khach lk ON kh.ma_loai_khach=lk.ma_loai_khach
-INNER JOIN dich_vu dv ON dv.ma_dich_vu=hd.ma_dich_vu GROUP BY kh.ma_khach_hang, ma_hop_dong
+INNER JOIN dich_vu dv ON dv.ma_dich_vu=hd.ma_dich_vu
+INNER JOIN  hop_dong_chi_tiet hdct ON hdct.ma_hop_dong=hd.ma_hop_dong
+INNER JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem
 ;
 
 
