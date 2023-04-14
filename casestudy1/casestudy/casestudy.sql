@@ -215,10 +215,15 @@ SELECT   kh.ho_ten FROM khach_hang kh GROUP BY kh.ho_ten;
 -- c3 
 
 
-
 -- 9.	Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2021
---  thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng.
+--  thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng. 
+-- Chi Phí Thuê + Số Lượng * Giá, với Số Lượng và Giá là từ bảng dich_vu_di_kem, hop_dong_chi_tiet) 
+SELECT MONTHNAME(hd.ngay_lam_hop_dong)  , COUNT(MONTHNAME(hd.ngay_lam_hop_dong)) 
+FROM khach_hang kh 
+INNER JOIN hop_dong hd ON hd.ma_khach_hang = kh.ma_khach_hang WHERE year(hd.ngay_lam_hop_dong) = 2021 
+AND MONTH(hd.ngay_lam_hop_dong) >= 1 GROUP BY MONTHNAME(hd.ngay_lam_hop_dong)  ; 
 
+/* CÁCH hiểu khác
 SELECT kh.ma_khach_hang AS 'mãkháchhàng', ifnull((dv.chi_phi_thue + ifnull(hdct.so_luong *dvdk.gia ,0) ),0)  as doanh_thu  FROM khach_hang kh 
 LEFT JOIN  hop_dong hd  ON kh.ma_khach_hang=hd.ma_khach_hang
 LEFT JOIN loai_khach lk ON kh.ma_loai_khach=lk.ma_loai_khach
@@ -226,18 +231,65 @@ LEFT JOIN dich_vu dv ON dv.ma_dich_vu=hd.ma_dich_vu
 LEFT JOIN  hop_dong_chi_tiet hdct ON hdct.ma_hop_dong=hd.ma_hop_dong
 LEFT JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem    WHERE   year(hd.ngay_lam_hop_dong) = 2021 
  AND  month(hd.ngay_lam_hop_dong) >= 1 GROUP BY  hd.ma_khach_hang  ;
-
+ */
 -- 10.	Hiển thị thông tin tương ứng với từng hợp đồng thì đã sử dụng bao nhiêu dịch vụ đi kèm. 
 -- Kết quả hiển thị bao gồm ma_hop_dong, ngay_lam_hop_dong, ngay_ket_thuc, tien_dat_coc, so_luong_dich_vu_di_kem
 --  (được tính dựa trên việc sum so_luong ở dich_vu_di_kem).
+SELECT hd.ma_hop_dong AS 'mã  hợp đồng' , hd.ngay_lam_hop_dong AS 'ngày làm hợp đồng' ,hd.ngay_ket_thuc AS 'ngày kết thúc', 
+ hd.tien_dat_coc AS 'Tiền cọc', SUM(IFNULL(hdct.so_luong ,0)) AS 'SỐ lượng hợp dịch vụ đi kèm '
+ FROM hop_dong hd
+INNER JOIN hop_dong_chi_tiet hdct ON hdct.ma_hop_dong = hd.ma_hop_dong 
+INNER JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem = hdct.ma_dich_vu_di_kem   GROUP BY hd.ma_hop_dong  ORDER BY hd.ma_hop_dong  ; 
+ 
+ /* 
+ 11.Hiển thị thông tin các dịch vụ đi kèm đã được sử dụng bởi những khách hàng
+ có ten_loai_khach là “Diamond” và có dia_chi ở “Vinh” hoặc “Quảng Ngãi”.
+ */
+ 
+ SELECT dvdk.ten_dich_vu_di_kem 
+ FROM khach_hang kh 
+ INNER JOIN hop_dong  hd ON hd.ma_khach_hang=kh.ma_khach_hang 
+  INNER JOIN hop_dong_chi_tiet hdct ON hdct.ma_hop_dong=hd.ma_hop_dong 
+   INNER JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem 
+      INNER JOIN loai_khach lk ON  lk.ma_loai_khach=kh.ma_loai_khach
+   WHERE ten_loai_khach = 'Diamond' AND kh.dia_chi LIKE '%Vinh%' OR kh.dia_chi  LIKE '%Quảng Ngãi%'
+ 
+ /*12.	Hiển thị thông tin ma_hop_dong, ho_ten (nhân viên), ho_ten (khách hàng), so_dien_thoai (khách hàng),
+ ten_dich_vu, so_luong_dich_vu_di_kem (được tính dựa trên việc sum so_luong ở dich_vu_di_kem), 
+ tien_dat_coc của tất cả các dịch vụ đã từng được khách hàng đặt vào 3 tháng cuối năm 2020 nhưng chưa  từng được khách hàng 
+ đặt vào 6 tháng đầu năm 2021.*/ ;
+ SELECT  hd.ma_hop_dong AS 'MÃ HỢP ĐỒNG '  , nv.ho_ten AS 'HỌ TÊN NHÂN VIÊN' ,kh.ho_ten AS'HỌ TÊN KHÁCH HÀNG', kh.so_dien_thoai  AS'SĐT',
+dv.ten_dich_vu AS'TÊN DỊCH VỤ ' , SUM(IFNULL((hdct.so_luong),0)) AS' SỐ LƯỢNG DỊCH VỤ ĐI KÈM' , hd.tien_dat_coc 
+ FROM   khach_hang kh 
+  INNER JOIN hop_dong  hd ON hd.ma_khach_hang=kh.ma_khach_hang 
+ INNER JOIN nhan_vien  nv ON nv.ma_nhan_vien=hd.ma_nhan_vien 
+  INNER JOIN dich_vu  dv ON dv.ma_dich_vu=hd.ma_dich_vu 
+    INNER JOIN hop_dong_chi_tiet hdct ON hdct.ma_hop_dong=hd.ma_hop_dong 
+   INNER JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem
+       WHERE   ( YEAR(hd.ngay_lam_hop_dong)=2020  
+   AND quarter(hd.ngay_lam_hop_dong) = 4 ) AND  (YEAR(hd.ngay_lam_hop_dong)=2021 AND quarter(hd.ngay_lam_hop_dong) <=2 )   ;
+  
+/*13.	Hiển thị thông tin các Dịch vụ đi kèm được sử dụng nhiều nhất bởi các Khách hàng đã đặt phòng.
+ (Lưu ý là có thể có nhiều dịch vụ có số lần sử dụng nhiều như nhau).*/
+SELECT dvdk.ten_dich_vu_di_kem MAX 
+FROM khach_hang kh  
+  INNER JOIN hop_dong  hd ON hd.ma_khach_hang=kh.ma_khach_hang 
+      INNER JOIN hop_dong_chi_tiet hdct ON hdct.ma_hop_dong=hd.ma_hop_dong 
+      INNER JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem GROUP BY kh.ma_khach_hang
 
 
+  
+  
  
 
 
+
+
+
+
+
 -- drop DATABASE furama;
-SELECT * FROM khach_hang k, loai_khach lk WHERE k.ma_loai_khach = lk.ma_loai_khach;
-SELECT ma_loai_khach, COUNT(ma_loai_khach) FROM khach_hang WHERE ma_khach_hang > 3 GROUP BY ma_loai_khach
+
 
 
 
