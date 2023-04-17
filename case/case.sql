@@ -352,7 +352,7 @@ FROM dich_vu dv
 INNER JOIN hop_dong hd ON hd.ma_dich_vu = dv.ma_dich_vu
 INNER JOIN hop_dong_chi_tiet hdct ON hdct.ma_hop_dong = hd.ma_hop_dong
 INNER JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem = hdct.ma_dich_vu_di_kem 
-WHERE YEAR(hd.ngay_lam_hop_dong) = 2021 and (dv.chi_phi_thue + hdct.so_luong * dvdk.gia) > 12   ); 
+WHERE YEAR(hd.ngay_lam_hop_dong) = 2021 and (dv.chi_phi_thue + hdct.so_luong * dvdk.gia) > 10000000  ); 
 SET  SQL_SAFE_UPDATES = 1 ;
 
 /*  18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).*/
