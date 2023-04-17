@@ -9,7 +9,7 @@ WHERE credit = ( SELECT  MAX(credit) FROM subjects );
  INNER JOIN subjects s ON s.sub_id=m.sub_id WHERE mark =  (SELECT MAX(m.mark) FROM  mark m ) ; 
  
  -- Hiển thị các thông tin sinh viên và điểm trung bình của mỗi sinh viên,
- -- xếp hạng theo thứ tự điểm giảm dần 
+ -- xếp hạng theo thứ tự điểm giảm dần  
  SELECT s.* , AVG(m.mark) AS diem_trung_binh
  FROM students s 
  INNER JOIN mark m ON m.student_id=s.student_id GROUP BY s.student_id

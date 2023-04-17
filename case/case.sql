@@ -618,15 +618,6 @@ INNER JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem 
 
 
 
- 
-
-
-
-
-
-
-
--- drop DATABASE furama;
 
 
 
@@ -931,22 +922,11 @@ INNER JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem 
    INNER JOIN vi_tri vt ON vt.ma_vi_tri = nv.ma_vi_tri
 	INNER JOIN trinh_do td ON td.ma_trinh_do = nv.ma_trinh_do
 	INNER JOIN bo_phan bp ON bp.ma_bo_phan = nv.ma_bo_phan
-	INNER JOIN hop_dong hd ON hd.ma_nhan_vien = nv.ma_nhan_vien WHERE YEAR (hd.ngay_lam_hop_dong) = 2020 
+	INNER JOIN hop_dong hd ON hd.ma_nhan_vien = nv.ma_nhan_vien WHERE YEAR (hd.ngay_lam_hop_dong) = 2020 ;
 
 
 
  
-
-
-
-
-
-
-
--- drop DATABASE furama;
-
-
-
 
 
 CREATE DATABASE furama;
@@ -1109,11 +1089,11 @@ SELECT * FROM nhan_vien WHERE ho_ten LIKE 'H%'OR  ho_ten LIKE   'T%'  OR  ho_ten
 SELECT *FROM khach_hang WHERE(round(DATEDIFF(CURDATE(),ngay_sinh)/365,0 ) ) BETWEEN 18 AND 50 AND (dia_chi LIKE'%Đà Nẵng%' OR dia_chi LIKE '%Quảng Trị%');
 -- 4.	Đếm xem tương ứng với mỗi khách hàng đã từng đặt phòng bao nhiêu lần. 
 -- Kết quả hiển thị được sắp xếp tăng dần theo số lần đặt phòng của khách hàng. Chỉ đếm những khách hàng nào có Tên loại khách hàng là “Diamond”.
+
 SELECT  k.*,lk.ten_loai_khach, COUNT(k.ma_khach_hang) FROM khach_hang k 
   INNER JOIN loai_khach lk ON k.ma_loai_khach =lk.ma_loai_khach
  INNER JOIN  hop_dong h ON k.ma_khach_hang=h.ma_khach_hang   
- WHERE lk.ten_loai_khach ='Diamond' GROUP BY k.ma_khach_hang ORDER BY k.ma_khach_hang ;
-
+ WHERE lk.ten_loai_khach = 'Diamond' GROUP BY k.ma_khach_hang ORDER BY k.ma_khach_hang ;
 -- 5.Hiển thị ma_khach_hang, ho_ten, ten_loai_khach, ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong, ngay_ket_thuc, tong_tien 
 -- (Với tổng tiền được tính theo công thức như sau:
 -- Chi Phí Thuê + Số Lượng * Giá, với Số Lượng và Giá là từ bảng dich_vu_di_kem, hop_dong_chi_tiet) cho tất cả các khách hàng đã từng đặt phòng.
@@ -1255,6 +1235,8 @@ INNER JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem 
     nv.ma_nhan_vien LIMIT 3;
 --  16 Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
 
+
+
 /* 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond,
  chỉ cập nhật những khách hàng đã từng đặt phòng với 
 Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ. */ ;
@@ -1266,8 +1248,5 @@ SET  SQL_SAFE_UPDATES = 1 ;
 /*  18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).*/
 
 -- drop DATABASE furama;
-
-
-
 
 
