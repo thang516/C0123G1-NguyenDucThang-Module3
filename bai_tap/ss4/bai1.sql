@@ -13,5 +13,5 @@ WHERE credit = ( SELECT  MAX(credit) FROM subjects );
  SELECT s.* , AVG(m.mark) AS diem_trung_binh
  FROM students s 
  INNER JOIN mark m ON m.student_id=s.student_id GROUP BY s.student_id
- ORDER BY m.mark DESC;
+ ORDER BY diem_trung_binh DESC;
  
