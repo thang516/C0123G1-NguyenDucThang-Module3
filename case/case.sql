@@ -161,8 +161,10 @@ INSERT INTO hop_dong_chi_tiet VALUES
 (7,	2,	2,	12);
 
 -- 2.	Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 kí tự.
+
 SELECT * FROM nhan_vien WHERE ho_ten LIKE 'H%'OR  ho_ten LIKE   'T%'  OR  ho_ten LIKE 'K%' AND length(ho_ten) <=15;
 -- 3.	Hiển thị thông tin của tất cả khách hàng có độ tuổi từ 18 đến 50 tuổi và có địa chỉ ở “Đà Nẵng” hoặc “Quảng Trị”
+
 SELECT *FROM khach_hang WHERE(round(DATEDIFF(CURDATE(),ngay_sinh)/365,0 ) ) BETWEEN 18 AND 50 AND (dia_chi LIKE'%Đà Nẵng%' OR dia_chi LIKE '%Quảng Trị%');
 -- 4.	Đếm xem tương ứng với mỗi khách hàng đã từng đặt phòng bao nhiêu lần. 
 -- Kết quả hiển thị được sắp xếp tăng dần theo số lần đặt phòng của khách hàng
@@ -176,12 +178,14 @@ SELECT  k.*,lk.ten_loai_khach, COUNT(k.ma_khach_hang) FROM khach_hang k
 -- (Với tổng tiền được tính theo công thức như sau:
 -- Chi Phí Thuê + Số Lượng * Giá, với Số Lượng và Giá là từ bảng dich_vu_di_kem, hop_dong_chi_tiet) cho tất cả các khách hàng đã từng đặt phòng.
 -- (những khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).
+
 SELECT kh.ma_khach_hang AS 'mãkháchhàng', ifnull((dv.chi_phi_thue + ifnull(hdct.so_luong *dvdk.gia ,0) ),0)  as total, ho_ten,dv.chi_phi_thue, ten_loai_khach , hd.ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong , ngay_ket_thuc FROM khach_hang kh 
 LEFT JOIN  hop_dong hd  ON kh.ma_khach_hang=hd.ma_khach_hang
 LEFT JOIN loai_khach lk ON kh.ma_loai_khach=lk.ma_loai_khach
 LEFT JOIN dich_vu dv ON dv.ma_dich_vu=hd.ma_dich_vu
 LEFT JOIN  hop_dong_chi_tiet hdct ON hdct.ma_hop_dong=hd.ma_hop_dong
 LEFT JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem  ORDER BY total ;
+
  -- 6.	Hiển thị ma_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue, ten_loai_dich_vu của tất cả các dv 
  -- chưa từng được khách hàng thực hiện đặt từ quý 1 của năm 2021 (Quý 1 là tháng 1, 2, 3). -> chưa đặt sẽ in ra
  SELECT * FROM dich_vu dv 
@@ -341,13 +345,14 @@ Tổng Tiền thanh toán trong năm 2021 là lớn hơn 10.000.000 VNĐ. */ ;
 -- Chi Phí Thuê + Số Lượng * Giá, với Số Lượng và Giá là từ bảng dich_vu_di_kem, hop_dong_chi_tiet) 
 
 SET  SQL_SAFE_UPDATES = 0 ;
-UPDATE loai_khach  SET ten_loai_khach = "Diamond" WHERE  ten_loai_khach = 'Platinum' AND ma_loai_khach =
-  (SELECT lk.ma_loai_khach ,(dv.chi_phi_thue + hdct.so_luong*dvdk.gia ) AS tong_tien FROM dich_vu dv 
-  INNER JOIN hop_dong hd ON hd.ma_dich_vu =  dv.ma_dich_vu 
-  INNER JOIN khach_hang kh ON kh.ma_khach_hang = hd.ma_khach_hang
-  INNER JOIN hop_dong_chi_tiet hdct ON hdct.ma_hop_dong = hd.ma_hop_dong 
-  INNER JOIN dich_vu_di_kem dcdk ON dvdk.ma_dich_vu_di_kem = hdct.ma_dich_vu_di_kem GROUP BY lk.ma_loai_khach HAVING tong_tien > 10.000000 
-  ) ; 
+UPDATE khach_hang 
+SET ma_loai_khach = 1
+WHERE ma_loai_khach = 2 and ma_khach_hang in  (SELECT hd.ma_khach_hang
+FROM dich_vu dv 
+INNER JOIN hop_dong hd ON hd.ma_dich_vu = dv.ma_dich_vu
+INNER JOIN hop_dong_chi_tiet hdct ON hdct.ma_hop_dong = hd.ma_hop_dong
+INNER JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem = hdct.ma_dich_vu_di_kem 
+WHERE YEAR(hd.ngay_lam_hop_dong) = 2021 and (dv.chi_phi_thue + hdct.so_luong * dvdk.gia) > 12   ); 
 SET  SQL_SAFE_UPDATES = 1 ;
 
 /*  18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).*/
