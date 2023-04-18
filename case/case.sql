@@ -1,5 +1,4 @@
 
-
 CREATE DATABASE furama;
 USE furama;
 CREATE TABLE bo_phan(
@@ -70,8 +69,8 @@ ma_hop_dong INT PRIMARY KEY,
 ngay_lam_hop_dong DATETIME NOT NULL,
 ngay_ket_thuc DATETIME NOT NULL,
 tien_dat_coc DOUBLE NOT NULL,
-ma_nhan_vien INT,FOREIGN KEY(ma_nhan_vien) REFERENCES nhan_vien(ma_nhan_vien),
-ma_khach_hang INT,FOREIGN KEY(ma_khach_hang) REFERENCES khach_hang(ma_khach_hang),
+ma_nhan_vien INT,FOREIGN KEY(ma_nhan_vien) REFERENCES nhan_vien(ma_nhan_vien) ON DELETE SET NULL ,
+ma_khach_hang INT,FOREIGN KEY(ma_khach_hang) REFERENCES khach_hang(ma_khach_hang) ON DELETE SET NULL  ,
 ma_dich_vu INT, FOREIGN KEY(ma_dich_vu) REFERENCES dich_vu(ma_dich_vu)
 );
 CREATE TABLE dich_vu_di_kem(
@@ -140,16 +139,16 @@ INSERT INTO dich_vu VALUES
 (5,'HoUSE Princess 02',10000,4000000,5,3,2,'nORmal','Có thêm bếp nướng',null,2,null),
 (6,'Room Twin 02',3000,900000,2,4,3,'nORmal','Có tivi',null,null,'1 Xe máy');
 
-INSERT INTO hop_dong VALUE(1,"2023-11-4","2023-11-6",0,3,1,3),
-(2,"2023-1-4","2023-1-6",200000,7,3,1),
-(3,"2023-6-4","2023-6-8",500000,3,4,2),
-(4,"2023-1-12","2023-1-16",1000000,7,5,5),
-(5,"2021-11-9","2021-11-14",0,7,2,6),
-(6,"2021-1-8","2021-1-12",600000,7,7,6),
-(7,"2023-12-6","2023-12-8",700000,7,4,4),
-(8,"2023-3-1","2023-3-2",1000000,3,4,1),
-(9,"2023-11-4","2023-11-8",300000,3,4,3),
-(10,"2022-11-6","2022-11-10",50000,10,3,5);
+INSERT INTO hop_dong VALUE(1,"2023-11-4","2023-11-6",0,4,1,3),
+(2,"2020-1-4","2023-1-6",200000,5,3,1),
+(3,"2021-6-4","2023-6-8",500000,3,4,2),
+(4,"2022-1-12","2023-1-16",1000000,7,5,5),
+(5,"2021-11-9","2021-11-14",0,10,2,6),
+(6,"2019-1-8","2021-1-12",600000,7,7,6),
+(7,"2022-12-6","2023-12-8",700000,2,4,4),
+(8,"2020-3-1","2023-3-2",1000000,3,4,1),
+(9,"2023-11-4","2023-11-8",300000,8,4,3),
+(10,"2022-11-6","2022-11-10",50000,6,3,5);
 
 INSERT INTO hop_dong_chi_tiet VALUES
 (1	,2,	1	,5),
@@ -161,14 +160,13 @@ INSERT INTO hop_dong_chi_tiet VALUES
 (7,	2,	2,	12);
 
 -- 2.	Hiển thị thông tin của tất cả nhân viên có trong hệ thống có tên bắt đầu là một trong các ký tự “H”, “T” hoặc “K” và có tối đa 15 kí tự.
-
 SELECT * FROM nhan_vien WHERE ho_ten LIKE 'H%'OR  ho_ten LIKE   'T%'  OR  ho_ten LIKE 'K%' AND length(ho_ten) <=15;
 -- 3.	Hiển thị thông tin của tất cả khách hàng có độ tuổi từ 18 đến 50 tuổi và có địa chỉ ở “Đà Nẵng” hoặc “Quảng Trị”
-
 SELECT *FROM khach_hang WHERE(round(DATEDIFF(CURDATE(),ngay_sinh)/365,0 ) ) BETWEEN 18 AND 50 AND (dia_chi LIKE'%Đà Nẵng%' OR dia_chi LIKE '%Quảng Trị%');
 -- 4.	Đếm xem tương ứng với mỗi khách hàng đã từng đặt phòng bao nhiêu lần. 
 -- Kết quả hiển thị được sắp xếp tăng dần theo số lần đặt phòng của khách hàng
 -- . Chỉ đếm những khách hàng nào có Tên loại khách hàng là “Diamond”.
+
 SELECT  k.*,lk.ten_loai_khach, COUNT(k.ma_khach_hang) FROM khach_hang k 
   INNER JOIN loai_khach lk ON k.ma_loai_khach =lk.ma_loai_khach
  INNER JOIN  hop_dong h ON k.ma_khach_hang=h.ma_khach_hang   
@@ -179,15 +177,17 @@ SELECT  k.*,lk.ten_loai_khach, COUNT(k.ma_khach_hang) FROM khach_hang k
 -- Chi Phí Thuê + Số Lượng * Giá, với Số Lượng và Giá là từ bảng dich_vu_di_kem, hop_dong_chi_tiet) cho tất cả các khách hàng đã từng đặt phòng.
 -- (những khách hàng nào chưa từng đặt phòng cũng phải hiển thị ra).
 
-SELECT kh.ma_khach_hang AS 'mãkháchhàng', ifnull((dv.chi_phi_thue + ifnull(hdct.so_luong *dvdk.gia ,0) ),0)  as total, ho_ten,dv.chi_phi_thue, ten_loai_khach , hd.ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong , ngay_ket_thuc FROM khach_hang kh 
+
+SELECT kh.ma_khach_hang AS 'mãkháchhàng', SUM(ifnull((dv.chi_phi_thue + ifnull(hdct.so_luong *dvdk.gia ,0) ),0) ) as total, ho_ten,dv.chi_phi_thue, ten_loai_khach , hd.ma_hop_dong, ten_dich_vu, ngay_lam_hop_dong , ngay_ket_thuc FROM khach_hang kh 
 LEFT JOIN  hop_dong hd  ON kh.ma_khach_hang=hd.ma_khach_hang
 LEFT JOIN loai_khach lk ON kh.ma_loai_khach=lk.ma_loai_khach
 LEFT JOIN dich_vu dv ON dv.ma_dich_vu=hd.ma_dich_vu
 LEFT JOIN  hop_dong_chi_tiet hdct ON hdct.ma_hop_dong=hd.ma_hop_dong
-LEFT JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem  ORDER BY total ;
+LEFT JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem GROUP BY kh.ma_khach_hang, hd.ma_hop_dong ORDER BY total ;
 
- -- 6.	Hiển thị ma_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue, ten_loai_dich_vu của tất cả các dv 
- -- chưa từng được khách hàng thực hiện đặt từ quý 1 của năm 2021 (Quý 1 là tháng 1, 2, 3). -> chưa đặt sẽ in ra
+ -- 6.	Hiển thị ma_dich_vu, ten_dich_vu, dien_tich, chi_phi_thue, ten_loai_dich_vu của tất cả các  loai dv 
+ -- chưa từng được khách hàng thực hiện đặt từ quý 1 của năm 2021 (Quý 1 là tháng 1, 2, 3). -> chưa đặt sẽ in ra  
+
  SELECT * FROM dich_vu dv 
  INNER JOIN loai_dich_vu ldv ON ldv.ma_loai_dich_vu = dv.ma_loai_dich_vu 
  WHERE dv.ma_dich_vu NOT IN (SELECT DISTINCT hd.ma_dich_vu FROM
@@ -198,6 +198,14 @@ LEFT JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem  
  -- của tất cả các loại dịch vụ đã từng được khách hàng đặt phòng trong năm 2020 - > sd trong năm 2020 và ->  chưa đc đặt trong năm 2021 
  -- nhưng chưa từng được khách hàng đặt phòng trong năm 2021.
 
+ SELECT dv.ma_dich_vu , dv.ten_dich_vu , dv.dien_tich , dv.so_nguoi_toi_da,dv.chi_phi_thue , ldv.ten_loai_dich_vu FROM dich_vu dv 
+ INNER JOIN loai_dich_vu ldv ON ldv.ma_loai_dich_vu = dv.ma_loai_dich_vu 
+ INNER JOIN hop_dong hd ON hd.ma_dich_vu = dv.ma_dich_vu 
+ WHERE year(hd.ngay_lam_hop_dong) =2020 AND dv.ma_dich_vu NOT IN (SELECT  hd.ma_dich_vu FROM hop_dong hd 
+  WHERE YEAR(hd.ngay_lam_hop_dong)  =2021)
+ 
+
+;
  SELECT 
  dv.ma_dich_vu , dv.ten_dich_vu, dv.dien_tich,dv.chi_phi_thue,ldv.ten_loai_dich_vu 
    FROM dich_vu dv
@@ -213,7 +221,7 @@ WHERE  year(hd.ngay_lam_hop_dong)=  2021  ) ;
 -- 8.	Hiển thị thông tin ho_ten khách hàng có trong hệ thống, với yêu cầu ho_ten không trùng nhau.
 -- Học viên sử dụng theo 3 cách khác nhau để thực hiện yêu cầu trên.
 -- c1 
-SELECT  DISTINCT kh.ho_ten FROM khach_hang kh;
+SELECT  DISTINCT kh.ho_ten FROM khach_hang kh ;
 -- C2 
 SELECT   kh.ho_ten FROM khach_hang kh GROUP BY kh.ho_ten;
 -- c3 
@@ -221,10 +229,14 @@ SELECT ho_ten FROM khach_hang UNION SELECT ho_ten FROM khach_hang;
 
 -- 9.	Thực hiện thống kê doanh thu theo tháng, nghĩa là tương ứng với mỗi tháng trong năm 2021
 --  thì sẽ có bao nhiêu khách hàng thực hiện đặt phòng. 
+
 SELECT MONTHNAME(hd.ngay_lam_hop_dong)  , COUNT(MONTHNAME(hd.ngay_lam_hop_dong)) 
 FROM khach_hang kh 
 INNER JOIN hop_dong hd ON hd.ma_khach_hang = kh.ma_khach_hang WHERE year(hd.ngay_lam_hop_dong) = 2021 
 AND MONTH(hd.ngay_lam_hop_dong) >= 1 GROUP BY MONTHNAME(hd.ngay_lam_hop_dong)  ; 
+
+
+
 
 /* CÁCH hiểu khác
 SELECT kh.ma_khach_hang AS 'mãkháchhàng', ifnull((dv.chi_phi_thue + ifnull(hdct.so_luong *dvdk.gia ,0) ),0)  as doanh_thu  FROM khach_hang kh 
@@ -239,6 +251,11 @@ LEFT JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem=hdct.ma_dich_vu_di_kem  
 -- Kết quả hiển thị bao gồm ma_hop_dong, ngay_lam_hop_dong, ngay_ket_thuc, tien_dat_coc, so_luong_dich_vu_di_kem
 --  (được tính dựa trên việc sum so_luong ở dich_vu_di_kem).
 
+SELECT  hd.ma_hop_dong,hd.ngay_lam_hop_dong,hd.ngay_ket_thuc,hd.tien_dat_coc , sum(hdct.so_luong)
+ FROM hop_dong hd
+ LEFT JOIN hop_dong_chi_tiet hdct  ON hdct.ma_hop_dong = hd.ma_hop_dong 
+GROUP BY  hd.ma_hop_dong;
+
 SELECT hd.ma_hop_dong AS 'mã  hợp đồng' , hd.ngay_lam_hop_dong AS 'ngày làm hợp đồng' ,hd.ngay_ket_thuc AS 'ngày kết thúc', 
  hd.tien_dat_coc AS 'Tiền cọc', SUM(IFNULL(hdct.so_luong ,0)) AS 'SỐ lượng hợp dịch vụ đi kèm '
  FROM hop_dong hd
@@ -249,6 +266,7 @@ INNER JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem = hdct.ma_dich_vu_di_ke
  11.Hiển thị thông tin các dịch vụ đi kèm đã được sử dụng bởi những khách hàng
  có ten_loai_khach là “Diamond” và có dia_chi ở “Vinh” hoặc “Quảng Ngãi”.
  */
+  
  SELECT dvdk.*
  FROM khach_hang kh 
  INNER JOIN hop_dong  hd ON hd.ma_khach_hang=kh.ma_khach_hang 
@@ -274,6 +292,8 @@ WHERE lk.ten_loai_khach = 'Diamond' AND( kh.dia_chi LIKE '%Vinh%' OR kh.dia_chi 
  WHERE quarter(hd.ngay_lam_hop_dong) <= 2 AND YEAR(hd.ngay_lam_hop_dong) = 2021 ) 
  GROUP BY  hd.ma_hop_dong ;
 */
+ 
+ 
  
  SELECT  hd.ma_hop_dong AS 'MÃ HỢP ĐỒNG ', GROUP_CONCAT( nv.ho_ten) AS 'HỌ TÊN NHÂN VIÊN' ,kh.ho_ten AS'HỌ TÊN KHÁCH HÀNG', kh.so_dien_thoai  AS'SĐT',
 dv.ten_dich_vu AS'TÊN DỊCH VỤ ' , SUM(hdct.so_luong) AS' SỐ LƯỢNG DỊCH VỤ ĐI KÈM' , SUM(hd.tien_dat_coc) AS'TIỀN CỌC'
@@ -328,14 +348,11 @@ INNER JOIN bo_phan bp ON bp.ma_bo_phan = nv.ma_bo_phan
 INNER JOIN hop_dong hd ON hd.ma_nhan_vien = nv.ma_nhan_vien WHERE YEAR (hd.ngay_lam_hop_dong) = 2020 OR YEAR (hd.ngay_lam_hop_dong) = 2021
  GROUP BY  nv.ma_nhan_vien HAVING COUNT(nv.ma_nhan_vien) < 4 ;
 --  16 Xóa những Nhân viên chưa từng lập được hợp đồng nào từ năm 2019 đến năm 2021.
-DELETE nv FROM nhan_vien nv  JOIN hop_dong hd
- WHERE n NOT IN (select nv.ma_nhan_vien from nhan_vien nv left join hop_dong hd on nv.ma_nhan_vien = hd.ma_nhan_vien where hd.ma_nhan_vien is null and 
- YEAR(hd.ngay_lam_hop_dong) =2019 OR  YEAR(hd.ngay_lam_hop_dong) =2020 ) ;
- select * from nhan_vien nv left join hop_dong hd on nv.ma_nhan_vien = hd.ma_nhan_vien where hd.ma_nhan_vien is null or  
-( YEAR(hd.ngay_lam_hop_dong) < 2019 or  YEAR(hd.ngay_lam_hop_dong) > 2021 )
-
-
-
+   SET FOREIGN_KEY_CHECKS = 0;
+SELECT * FROM nhan_vien;
+DELETE FROM nhan_vien nv WHERE nv.ma_nhan_vien 
+NOT IN (SELECT hd.ma_nhan_vien FROM hop_dong hd WHERE YEAR(hd.ngay_lam_hop_dong) BETWEEN 2019 AND 2021 );
+  SET FOREIGN_KEY_CHECKS = 1;
 
 
 /* 17.	Cập nhật thông tin những khách hàng có ten_loai_khach từ Platinum lên Diamond,
@@ -356,7 +373,31 @@ WHERE YEAR(hd.ngay_lam_hop_dong) = 2021 and (dv.chi_phi_thue + hdct.so_luong * d
 SET  SQL_SAFE_UPDATES = 1 ;
 
 /*  18.	Xóa những khách hàng có hợp đồng trước năm 2021 (chú ý ràng buộc giữa các bảng).*/
+  SET FOREIGN_KEY_CHECKS = 0;
+  SET SQL_SAFE_UPDATES = 0;
+DELETE FROM khach_hang kh  WHERE kh.ma_khach_hang IN ( SELECT hd_ma_khach FROM
+(SELECT  hd.ma_khach_hang AS hd_ma_khach FROM hop_dong hd 
+INNER JOIN khach_hang kh ON kh.ma_khach_hang = hd.ma_khach_hang
+ WHERE year(hd.ngay_lam_hop_dong)  < 2021 ) AS hd_ma_khach_hang )   ;
+   SET SQL_SAFE_UPDATES = 1;
+  SET FOREIGN_KEY_CHECKS = 1;
+
+
+-- 19.	Cập nhật giá cho các dịch vụ đi kèm được sử dụng trên 10 lần trong năm 2020 lên gấp đôi.
+SET SQl_SAFE_UPDATES =0;
+UPDATE dich_vu_di_kem SET  gia = gia * 2 WHERE ma_dich_vu_di_kem IN (SELECT madvdk FROM  (SELECT dvdk.ma_dich_vu_di_kem AS madvdk FROM hop_dong_chi_tiet hdct 
+INNER JOIN hop_dong hd ON hd.ma_hop_dong = hdct.ma_hop_dong 
+INNER JOIN dich_vu_di_kem dvdk ON dvdk.ma_dich_vu_di_kem = hdct.ma_dich_vu_di_kem
+  WHERE   year(hd.ngay_lam_hop_dong) =2020 GROUP BY  dvdk.ma_dich_vu_di_kem HAVING SUM(hdct.so_luong)>10) AS madvdka )  ; 
+
+
+-- 20.	Hiển thị thông tin của tất cả các nhân viên và khách hàng có trong hệ thống,
+--  thông tin hiển thị bao gồm id (ma_nhan_vien, ma_khach_hang), ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi.
+
+SELECT  ma_nhan_vien, ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi  FROM nhan_vien 
+UNION 
+SELECT ma_khach_hang , ho_ten, email, so_dien_thoai, ngay_sinh, dia_chi FROM khach_hang
+
+
 
 -- drop DATABASE furama;
-
-
