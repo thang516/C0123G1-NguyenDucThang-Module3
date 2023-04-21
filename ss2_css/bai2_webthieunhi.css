@@ -1,6 +1,18 @@
 .container{
     height: 595px;
 }
+p{
+    color: black;
+    text-indent: 2em;
+    font-family: "Times New Roman";
+
+}
+#cottruyen {
+    color: black;
+    font-size: x-large ;
+    text-indent: 2em;
+    font-family: "Times New Roman";
+}
 .nav{
 
     height: 20px;
@@ -112,14 +124,7 @@ li{
         font-size: 55px;
         color: white;
     }
-    p{
-        color: darkblue;
-        font-size: x-large ;
-        text-indent: 4em;
-        font-family: "Times New Roman";
 
-        font-weight: bold;
-    }
 }
 /*Màn hinh laptop và máy tính bảng*/
 @media only screen and (min-width:741px)and (max-width:1240px){
