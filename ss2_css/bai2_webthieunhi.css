@@ -2,7 +2,7 @@
     height: 595px;
 }
 .nav{
-    /*background-color: aqua;*/
+
     height: 20px;
     justify-content: center;
     margin-top: 50px;
@@ -12,18 +12,20 @@ a{
     color: black;
 }
 a:visited {
-    color: red;
+    color: cadetblue;
 }
 a:hover {
-    color: yellow;
+    color: orangered;
 }
 .header{
-    background: black;
+        background-color: darksalmon;
     height: 50px;
-    color: antiquewhite;
+    color: black;
     position: fixed;
     top: 0px;
     width: 100%;
+    align-items: center;
+
 }
 .header img{
     height: 30px;
@@ -39,8 +41,8 @@ video{
     height: 900px;
 }
 .center .left .video{
-    margin:0 20px;
-    margin: 5px;
+    margin:0 40px;
+    margin: 20px;
 }
 .center .right {
     padding: 20px;
@@ -53,9 +55,8 @@ video{
     margin: 0px;
     box-sizing: border-box;
 }
-p{
-    font-family: "arial";
-}
+
+
 .row{
     /*cho phép thẻ div (col) nổi lên trên*/
     display: flex;
@@ -80,10 +81,11 @@ li{
 }
 
 .footer{
-    background: bisque;
+        background-color: palevioletred;
     height: 50px;
     justify-content: center;
-    color: chartreuse;
+    color: black;
+    align-items: center;
 }
 /*màn hình điện thoai*/
 @media only screen and (max-width:740px ){
@@ -105,13 +107,18 @@ li{
         text-align: center;
         color: white;
     }
-    p{
-        font-size: 35px;
-        color: darkblue;
-    }
+
     .title{
         font-size: 55px;
         color: white;
+    }
+    p{
+        color: darkblue;
+        font-size: x-large ;
+        text-indent: 4em;
+        font-family: "Times New Roman";
+
+        font-weight: bold;
     }
 }
 /*Màn hinh laptop và máy tính bảng*/
