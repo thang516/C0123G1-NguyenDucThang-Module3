@@ -10,6 +10,7 @@
     align-items: center;
     justify-content: space-between;
     padding: 0 20px;
+    overflow: hidden;
 }
 .footer{
     background:#616161;
@@ -31,9 +32,8 @@ button{
 }
 .right{
     background: #f9f9f9;
-
-
 }
+
 button{
     height: 100px;
     width: 100px;
@@ -43,7 +43,7 @@ button{
 }
 .center{
     background: #f0f0f0;
-    height: 500px;
+    height: auto;
 }
 *{
     margin: 0px;
@@ -107,6 +107,7 @@ margin-bottom: 50px;
         font-size: 55px;
         color: white;
     }
+
 }
 /*Màn hinh laptop và máy tính bảng*/
 @media only screen and (min-width:741px)and (max-width:1240px){
@@ -122,6 +123,7 @@ margin-bottom: 50px;
     .col-m-10 {width: 83.33333%;}
     .col-m-11 {width: 91.66667%;}
     .col-m-12 {width: 100%;}
+
 }
 /*Màn hình máy tính pc và tivi smart*/
 @media only screen and (min-width:1241px){

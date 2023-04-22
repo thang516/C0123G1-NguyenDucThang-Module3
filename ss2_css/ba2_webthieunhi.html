@@ -5,64 +5,80 @@
     <title>Title</title>
     <link rel="stylesheet" href="bai2_webthieunhi.css">
     <style>
-        li{
+        li {
             border-right: 1px solid black;
 
         }
     </style>
 </head>
 <body>
-    <div class="row header" >
-        <h1>Phim Hoạt Hình</h1>
-        <img src="data:image/png;base64,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">
-    </div>
+<div class="row header">
+    <h1>Phim Hoạt Hình</h1>
+    <img src="data:image/png;base64,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">
+</div>
 
-    <div class="row nav ">
-        <ul>
-            <li><a href="https://vincom.com.vn/trend/phim-hoat-hinh-chieu-rap">Phim hoạt hình</a></li>
-            <li><a href="https://tip.edu.vn/top-11-phim-hoat-hinh-duoc-yeu-thich-nhat/">Phim hoạt hình yêu thích</a></li>
-            <li><a href="https://kids.pops.vn/blog/nhan-vat-hoat-hinh/">Nhân vật hoạt hình</a></li>
-            <li style="border-right: none"><a href="#"> Góp ý</a></li>
-        </ul>
-
-
-    </div>
-
-    <div class="row center col-l-12 ">
-        <div class="left col col-l-4" >
-            <div class="row video" >
-                <iframe width="500" height="400" src="https://www.youtube.com/embed/RSwgdGr_sAw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
-               <p  > <b>Khách Sạn Thời Kì Đồ Đá </b> - 6,877,456 lượt xem </p>
-
-            </div>
+<div class="row nav ">
+    <ul>
+        <li><a href="https://vincom.com.vn/trend/phim-hoat-hinh-chieu-rap">Phim hoạt hình</a></li>
+        <li><a href="https://tip.edu.vn/top-11-phim-hoat-hinh-duoc-yeu-thich-nhat/">Phim hoạt hình yêu thích</a></li>
+        <li><a href="https://kids.pops.vn/blog/nhan-vat-hoat-hinh/">Nhân vật hoạt hình</a></li>
+        <li style="border-right: none"><a href="#"> Góp ý</a></li>
+    </ul>
 
 
+</div>
 
-            <div class="row video">
-                <iframe width="500" height="400" src="https://www.youtube.com/embed/Xk7GKMV3Ipg" title="[S6] Doraemon Tập 276 - Khăn Trải Bàn Ẩm Thực, Việc Làm Thêm Của Người Tuyết - Tiếng Việt" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-                <p ><b>Khăn Trải Bàn Ẩm Thực</b> - 8,435,231 lượt xem</p>
+<div class="row center col-l-12 ">
+    <div class="left col col-l-4">
+        <div class="row video">
+            <iframe width="500" height="400" src="https://www.youtube.com/embed/RSwgdGr_sAw"
+                    title="YouTube video player" frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
 
-            </div>
-
-
+            <p><b>Khách Sạn Thời Kì Đồ Đá </b> - 6,877,456 lượt xem </p>
 
         </div>
 
-        <div class="right col col-l-8 " id="cottruyen" >
-            <iframe width="400" height="400" src="https://www.youtube.com/embed/yPTTFuG85OI" title="[S7] Doraemon Tập 333 - Nobita Trong Tim Nobita" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-            <p> <b>Nobita Trong Tim Nobita</b>  - 6,127,528 lượt xem </p>
-            <br>
-            <p >Ngày 7 tháng 8 là ngày sinh nhật của Nobita, cậu rất háo hức được đón chờ những lời chúc mừng đến từ bạn bè và gia đình khi biết hôm nay là một ngày đặc biệt đối với cậu. Tuy nhiên đáp lại những kỳ vọng của Nobita lại là những hờ hững của bạn bè và gia đình, Doremon thì không cho cậu sử dụng bảo bối, mẹ cậu thì lại trách mắng cậu vì những bài kiểm tra điểm 0, bạn bè thì lại tỏ vẻ như không nhớ gì về ngày sinh nhật của cậu, nhưng tất cả mọi người đều nhớ về sinh nhật cậu và họ chỉ giả vờ để chuẩn bị cho cậu một buổi sinh nhật bất ngờ.</p>
-            <br>
 
-            <p >Nhưng những hành động của bạn bè và gia đình đã vô tình khiến Nobita trở nên hụt hẫng và thế là cậu quyết định dùng bảo bối của Doremon để bước vào thế giới giấc mơ, tuy nhiên thì khi cậu đã vào thì không thể thoát ra và bạn bè của Nobita cùng với Doremon phải vào thế giới giấc mơ và trải qua rất nhiều thử thách để cứu cậu ra khỏi thế giới mộng tưởng đó.</p>
+        <div class="row video">
+            <iframe width="500" height="400" src="https://www.youtube.com/embed/Xk7GKMV3Ipg"
+                    title="[S6] Doraemon Tập 276 - Khăn Trải Bàn Ẩm Thực, Việc Làm Thêm Của Người Tuyết - Tiếng Việt"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen></iframe>
+            <p><b>Khăn Trải Bàn Ẩm Thực</b> - 8,435,231 lượt xem</p>
 
         </div>
+
+
     </div>
 
-    <div class="row footer ">
+    <div class="right col col-l-8 " id="cottruyen">
+        <iframe width="400" height="400" src="https://www.youtube.com/embed/yPTTFuG85OI"
+                title="[S7] Doraemon Tập 333 - Nobita Trong Tim Nobita" frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen></iframe>
+        <p><b>Nobita Trong Tim Nobita</b> - 6,127,528 lượt xem </p>
+        <br>
+        <p>Ngày 7 tháng 8 là ngày sinh nhật của Nobita, cậu rất háo hức được đón chờ những lời chúc mừng đến từ bạn bè
+            và gia đình khi biết hôm nay là một ngày đặc biệt đối với cậu. Tuy nhiên đáp lại những kỳ vọng của Nobita
+            lại là những hờ hững của bạn bè và gia đình, Doremon thì không cho cậu sử dụng bảo bối, mẹ cậu thì lại trách
+            mắng cậu vì những bài kiểm tra điểm 0, bạn bè thì lại tỏ vẻ như không nhớ gì về ngày sinh nhật của cậu,
+            nhưng tất cả mọi người đều nhớ về sinh nhật cậu và họ chỉ giả vờ để chuẩn bị cho cậu một buổi sinh nhật bất
+            ngờ.</p>
+        <br>
+
+        <p>Nhưng những hành động của bạn bè và gia đình đã vô tình khiến Nobita trở nên hụt hẫng và thế là cậu quyết
+            định dùng bảo bối của Doremon để bước vào thế giới giấc mơ, tuy nhiên thì khi cậu đã vào thì không thể thoát
+            ra và bạn bè của Nobita cùng với Doremon phải vào thế giới giấc mơ và trải qua rất nhiều thử thách để cứu
+            cậu ra khỏi thế giới mộng tưởng đó.</p>
+
+    </div>
+</div>
+
+<div class="row footer ">
     <h3> &copy; 2023 - Thiết kế web bởi Đức Thắng </h3>
-    </div>
+</div>
 </body>
 </html>
