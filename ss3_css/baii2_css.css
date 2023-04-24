@@ -1,0 +1,32 @@
+*{
+    margin: 0 ;
+    padding: 0 ;
+}
+.nav-tab {
+    padding: 0 24px;
+    font-family: 'Segoe UI' ;
+    font-size: 18px;
+    font-weight: 600
+}
+#navbarSupportedContent .nav-item .active{
+    font-weight: bolder ;
+    border-left: 2px solid black;
+    font-weight: 600;
+    font-size: 18px;
+}
+#navbarSupportedContent .nav-item.dropdown .nav-link{
+    font-size: 13px;
+    font-weight: 400;
+}
+.content{
+    width: 100%;
+    background-image: url("https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Hero_FY24_Surface-homepage_169?scl=1");
+    background-size:100% ;
+}
+.content1{
+padding-top: 200px;
+    width: 30%;
+    padding-bottom:150px;
+
+    padding-left: 100px;
+ }
