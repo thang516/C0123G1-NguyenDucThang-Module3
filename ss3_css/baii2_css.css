@@ -2,6 +2,9 @@
     margin: 0 ;
     padding: 0 ;
 }
+a{
+    text-decoration: none;
+}
 .nav-tab {
     padding: 0 24px;
     font-family: 'Segoe UI' ;
@@ -14,19 +17,75 @@
     font-weight: 600;
     font-size: 18px;
 }
+#navbarSupportedContent .nav-item.dropdown {
+    display: flex;
+    align-items: center;
+}
+.nav-item.dropdown  .nav-link.dropdown-toggle{
+    font-size:  13px;
+    color: black;
+
+}
+.select a {
+    margin-right: 30px;
+    font-weight: bolder ;
+    white-space: nowrap;
+    text-decoration: none;
+    color: black ;
+    padding-top: 10px ;
+}
+ .select-2 .option {
+     display: flex;
+     align-items: center;
+     font-weight: bold ;
+     font-size: 15px;
+     font-family: 'Segoe UI';
+     margin: 0 20px;
+
+ }
+ .select-2{
+     display: flex;
+     margin-top: 40px;
+     padding: 0 5%;
+ }
+
 #navbarSupportedContent .nav-item.dropdown .nav-link{
     font-size: 13px;
     font-weight: 400;
+}
+.shop-deal button{
+    font-weight: 600;
+    font-size: 13px;
+    padding: 4px 7px 5px;
+    margin: 1px 5px;
+    border: 1px solid;
+    border-radius: 3px;
 }
 .content{
     width: 100%;
     background-image: url("https://cdn-dynmedia-1.microsoft.com/is/image/microsoftcorp/Hero_FY24_Surface-homepage_169?scl=1");
     background-size:100% ;
+    background-repeat: no-repeat;
+    min-height: 661px;
+    line-height: 30px;
 }
 .content1{
-padding-top: 200px;
-    width: 30%;
-    padding-bottom:150px;
+padding-top: 80px;
 
-    padding-left: 100px;
+    width: 40%;
+    padding-bottom:100px;
+
+    padding-left: 60px;
  }
+.tablets .video {
+    padding: 0;
+}
+.tablets video {
+    border-radius: 10px;
+    width: 100%;
+
+}
+surface-add{
+
+
+}
