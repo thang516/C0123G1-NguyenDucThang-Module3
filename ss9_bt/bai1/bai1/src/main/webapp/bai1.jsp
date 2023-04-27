@@ -12,7 +12,7 @@
 </head>
 <body>
 <div id="content">
-  <form action="ServletProduct" method="post">
+  <form action="/ServletProduct" method="post">
     <div id="data">
       <label > Product Description</label>
       <input type="text" name="description">

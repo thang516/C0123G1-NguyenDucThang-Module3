@@ -13,8 +13,8 @@
 <body>
         <h1>Product Description: ${description}</h1>
         <h1>Product Price: ${price}</h1>
-        <h1>Product discount_percent:${discount_percent}</h1>
-        <h1>Product discount_amount: ${discount_amount}</h1>
-        <h1>Product discount_price: ${discount_price}</h1>
+        <h1>Product discount_percent:${discountPercent}</h1>
+        <h1>Product discount_amount: ${discountAmount}</h1>
+        <h1>Product discount_price: ${discountPrice}</h1>
 </body>
 </html>

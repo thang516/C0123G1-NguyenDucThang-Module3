@@ -9,17 +9,17 @@
     <form action="ServletProductC2" method="post">
         <div id="data">
             <label > Product Description</label>
-            <input type="text" name="description">
+            <input type="text" name="description" style="width: 100px">
             <br>
             <label>List Price</label>
-            <input type="text" name="price">
+            <input type="text" name="price" style="width: 167px">
             <br>
             <label >Discount Percent</label>
-            <input type="text" name="discount">
+            <input type="text" name="discount" style="width: 119px" >
         </div>
         <div>
             <br>
-            <input type="submit" value="calculate discount">
+            <input type="submit" value="calculateDiscount">
         </div>
     </form>
 </div>
