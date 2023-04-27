@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="ab7a6317-d50e-4203-b901-555e647129c9" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/ss3_css/bai2_ss3.html" beforeDir="false" afterPath="$PROJECT_DIR$/ss3_css/bai2_ss3.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ss3_css/baii2_css.css" beforeDir="false" afterPath="$PROJECT_DIR$/ss3_css/baii2_css.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/C0123G1-NguyenDucThang-Module3.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/C0123G1-NguyenDucThang-Module3.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testlogin/testlogin.css" beforeDir="false" afterPath="$PROJECT_DIR$/testlogin/testlogin.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/testlogin/testlogin.html" beforeDir="false" afterPath="$PROJECT_DIR$/testlogin/testlogin.html" afterDir="false" />
     </list>
@@ -11,6 +11,13 @@
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -28,9 +35,40 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
-    "last_opened_file_path": "D:/codegym/C0123G1-NguyenDucThang-Module3"
+    "last_opened_file_path": "D:/codegym/module3_giai_thuat",
+    "project.structure.last.edited": "Project",
+    "project.structure.proportion": "0.0",
+    "project.structure.side.proportion": "0.0"
   }
 }]]></component>
+  <component name="RunManager" selected="Application.giai_thuat.GiaiThuat">
+    <configuration name="GiaiThuat" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="GiaiThuat" />
+      <module name="C0123G1-NguyenDucThang-Module3" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="giai_thuat.GiaiThuat" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="giai_thuat.GiaiThuat" />
+      <module name="C0123G1-NguyenDucThang-Module3" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="giai_thuat.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.giai_thuat.GiaiThuat" />
+        <item itemvalue="Application.GiaiThuat" />
+      </list>
+    </recent_temporary>
+  </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
@@ -40,6 +78,7 @@
       <option name="presentableId" value="Default" />
       <updated>1682480741932</updated>
       <workItem from="1682480743642" duration="111000" />
+      <workItem from="1682500287548" duration="365000" />
     </task>
     <servers />
   </component>
