@@ -30,6 +30,7 @@
             <th>Producer</th>
             <th>Delete</th>
             <th>Edit</th>
+            <th>Details</th>
         </tr>
     </thread>
     <tbody>
@@ -70,6 +71,34 @@
             <td>
                 <button type="submit" class="btn btn-outline-success" onclick="window.location.href='/product?action=edit&idEdit=${product.getId()}'">Edit</button>
             </td>
+<td>
+            <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#staticBackdrop${product.getId()}">
+                Detail
+            </button>
+
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop${product.getId()}" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Product Detail</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <p>Id :${product.getId()}</p>
+                            <p>Product Name :${product.getNameProduct()}</p>
+                            <p>Price :${product.getPriceProduct()}</p>
+                            <p>Description : ${product.getDescription()}</p>
+                            <p>Product Producer :${product.getProducer()}</p>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+</td>
         </tr>
     </c:forEach>
     </tbody>

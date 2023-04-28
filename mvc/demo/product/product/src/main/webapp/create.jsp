@@ -14,12 +14,6 @@
 <html>
 <head>
     <title>Create</title>
-        style{
-        form{
-        margin : 0 auto;
-
-        }
-        }
 </head>
 <body>
 <form method="post" action="/product?action=create">
