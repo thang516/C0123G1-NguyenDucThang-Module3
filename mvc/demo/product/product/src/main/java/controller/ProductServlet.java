@@ -37,7 +37,6 @@ public class ProductServlet extends HttpServlet {
                 request.setAttribute("idEdit",id);
                 request.getRequestDispatcher("/edit.jsp").forward(request,response);
                 break;
-
             default:
                 showList(request, response);
         }
@@ -72,10 +71,10 @@ public class ProductServlet extends HttpServlet {
                 String producer = request.getParameter("producer");
                 Product product = new Product(id, nameProduct, priceProduct, description, producer);
                productService.edit(product);
-
-
                 response.sendRedirect("/product");
                 break;
+            default:
+                request.getRequestDispatcher("/error.jsp").forward(request,response);
         }
     }
 
