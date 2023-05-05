@@ -77,7 +77,9 @@ public class UserServlet extends HttpServlet {
                 case "delete":
                     deleteUser(request, response);
                     break;
-
+                case"sort":
+                    sortByName(request, response);
+                    break;
 
                 default:
                     listUser(request, response);
@@ -86,6 +88,13 @@ public class UserServlet extends HttpServlet {
         } catch (SQLException ex) {
             throw new ServletException(ex);
         }
+    }
+
+    private void sortByName(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        List<User> listUser = userDAO.sortByName();
+        request.setAttribute("listUser", listUser);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("list.jsp");
+        dispatcher.forward(request, response);
     }
 
     private void listUser(HttpServletRequest request, HttpServletResponse response)
