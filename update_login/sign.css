@@ -1,0 +1,37 @@
+.title{
+    text-align:  center;
+    justify-content: center;
+}
+.content {
+    background: gold;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 400px;
+
+}
+label{
+    display: inline-block;
+    min-width: 150px;
+    text-align: left;
+}
+.form-control{
+    text-align: center;
+    margin: 0 auto;
+}
+h1{
+    text-align: center;
+
+}
+.form-item {
+    display: flex;
+    padding: 5px 10px;
+}
+.form-item input{
+    flex: 1;
+    border: none;
+}
+.btn-submit {
+    text-align: center;
+}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="c692d21c-7763-4a32-a05f-2394f0bbcdc3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/.idea/.gitignore" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/.idea/gradle.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/.idea/misc.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/.idea/uiDesigner.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/.idea/vcs.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/build.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/gradle/wrapper/gradle-wrapper.jar" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/gradle/wrapper/gradle-wrapper.properties" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/gradlew" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/gradlew.bat" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/settings.gradle" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/src/main/webapp/WEB-INF/web.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/src/main/webapp/create.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/src/main/webapp/home.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/src/main/webapp/index.jsp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ontap1234cotachrieng/ontap/ontap/src/main/webapp/list.jsp" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="2PQOe68jSz9e2q0OqffU09QLjGr" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="c692d21c-7763-4a32-a05f-2394f0bbcdc3" name="Default Changelist" comment="" />
+      <created>1683385930119</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1683385930119</updated>
+      <workItem from="1683385931406" duration="2000" />
+    </task>
+    <servers />
+  </component>
+</project>
