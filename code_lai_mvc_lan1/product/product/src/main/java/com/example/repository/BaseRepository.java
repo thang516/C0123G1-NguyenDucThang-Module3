@@ -1,11 +1,11 @@
-package repository;
+package com.example.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class BaseRepository {
-    private static final String URL="jdbc:mysql://localhost:3306/product";
+    private static final String URL="jdbc:mysql://localhost:3306/student_ontap";
     private static final String USER="root";
     private static final String PASS="tonyadam56";
 

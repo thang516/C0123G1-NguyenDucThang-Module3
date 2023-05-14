@@ -12,6 +12,6 @@
 </head>
 <body>
 <h1>Đây Là Trang Chủ</h1>
-<a href="/product">kích zo</a>
+<a href="/student">kích zo</a>
 </body>
 </html>
