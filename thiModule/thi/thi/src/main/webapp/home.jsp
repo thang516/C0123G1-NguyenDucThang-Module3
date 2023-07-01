@@ -12,6 +12,6 @@
 </head>
 <body>
 <h1>Đây là trang chủ</h1>
-<a href="/contract">Kích zô</a>
+<a href="/manage">Kích zô</a>
 </body>
 </html>

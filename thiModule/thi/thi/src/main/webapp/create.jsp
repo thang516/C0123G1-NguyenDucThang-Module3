@@ -14,18 +14,35 @@
     <title>Title</title>
 </head>
 <body>
-<form action="/contract?action=create" method="post">
-  <label>Name</label>
-  <input class="form-control" type="text" name="name" required>
-  <label>Id Contract</label>
-  <input class="form-control" type="number" name="idContract" required  >
-  <label>Date Start</label>
-  <input class="form-control" type="date" name="dateStart" required>
-  <label>Date End</label>
-  <input class="form-control" type="date" name="dateEnd" required>
+<form action="/manage?action=create" method="post">
+
+
+<%--  equired onchange="checkName('name', 'errorName')--%>
+  <label> Tên tài khoản </label>
+<%--  <input class="form-control" type="text" name="user"  required>--%>
+  <select class="form-control"  name="user" id="" required>
+    <option value="thang">thang</option>
+    <option value="adz">adz</option>
+    <option value="vien">vien</option>
+  </select>
+<%--  <small id="errorName"></small>--%>
+  <label>Số Đăng kí Nuôi</label>
+  <select class="form-control"  name="id" id="" required>
+    <option value="1">1</option>
+    <option value="2">2</option>
+  </select>
+<%--  <input class="form-control" type="number" name="id" required >--%>
+  <label>Mô tả lỗi vi phạm</label>
+  <input class="form-control" type="text" name="information" required>
+  <label>Ngày giờ vi phạm </label>
+  <input class="form-control" type="text" name="dateTime" required>
+  <label>Tiền đóng phạt </label>
+  <input class="form-control" type="text" name="money" required>
 
   <button class="btn btn-primary" type="submit">Create</button>
 
+  <button class="btn btn-outline-primary" type="button">Back</button>
 </form>
+<%--<script src="regex.js"></script>--%>
 </body>
 </html>

@@ -80,6 +80,6 @@
 
 </table>
 <h2>${mess}</h2>
-<button class="btn btn-primary" onclick="window.location.href='/contract?action=create'">Create</button>
+<button class="btn btn-primary" onclick="window.location.href='/contract?action=create' ">Create</button>
 </body>
 </html>

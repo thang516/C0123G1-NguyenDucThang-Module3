@@ -23,7 +23,19 @@ DELETE FROM hop_dong_giao_dich hd WHERE id = 5 ;
 SELECT hd.`name`,hd.id_contract,hd.ngay,hd.ngay_ket_thuc, lhd.name_contract FROM hop_dong_giao_dich hd 
 INNER JOIN loai_hop_dong lhd ON lhd.id_contract = hd.id_contract
  WHERE `name` Like '%hợp đồng%' AND lhd.name_contract LIKE '%giao dich%' ; 
- 
  UPDATE hop_dong_giao_dich SET `name` = 'tài' , id_contract = 2 , ngay = '05/16/2023',ngay_ket_thuc='05/17/2023'  
- 
  WHERE id =5 ;
+ SELECT hd.*,ldv.name_contract FROM hop_dong_giao_dich hd 
+ INNER JOIN loai_hop_dong ldv ON ldv.id_contract = hd.id_contract ;
+ SELECT * FROM loai_hop_dong ; 
+ INSERT INTO hop_dong_giao_dich(`name`,id_contract,ngay,ngay_ket_thuc) VALUES('thag',1,'05/15/2023','05/17/2023');
+ DELETE FROM hop_dong_giao_dich WHERE id = 1;
+ SELECT hd.* ,lhd.name_contract FROM  hop_dong_giao_dich hd
+ INNER JOIN loai_hop_dong lhd ON lhd.id_contract = hd.id_contract  WHERE `name` Like '%nga%';
+ SELECT hd.*,lhd.name_contract FROM hop_dong_giao_dich hd 
+ INNER JOIN loai_hop_dong lhd ON lhd.id_contract=hd.id_contract;
+ SELECT * FROM loai_hop_dong; 
+ INSERT INTO hop_dong_giao_dich(`name`,id_contract,ngay,ngay_ket_thuc) VALUES('thag',1,'05/15/2023','05/17/2023');
+ DELETE FROM hop_dong_giao_dich WHERE id = 1;
+ SELECT hd.*,lhd.name_contract FROM hop_dong_giao_dich hd
+ INNER JOIN loai_hop_dong lhd ON lhd.id_contract = hd.id_contract WHERE `name` LIKE '%thang%';
